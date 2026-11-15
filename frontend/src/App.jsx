@@ -19,19 +19,14 @@ const App = () => {
   const [copied, setCopied] = useState("");
 
   const fetchUrls = async () => {
-    const response = await axios.get(
-      "https://url-shortener-lpf1.onrender.com/api/url",
-    );
+    const response = await axios.get("/api/url");
     setUrls(response.data.data);
   };
 
   const createShortUrl = async () => {
-    const response = await axios.post(
-      "https://url-shortener-lpf1.onrender.com/api/url",
-      {
-        url: inputValue,
-      },
-    );
+    const response = await axios.post("/api/url", {
+      url: inputValue,
+    });
 
     setCurrentUrl({
       originalUrl: response.data.data.originalUrl,
@@ -44,7 +39,7 @@ const App = () => {
   };
 
   const deleteUrl = async (id) => {
-    await axios.delete(`https://url-shortener-lpf1.onrender.com/api/url/${id}`);
+    await axios.delete(`/api/url/${id}`);
     fetchUrls();
   };
 
