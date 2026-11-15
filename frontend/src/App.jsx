@@ -19,14 +19,19 @@ const App = () => {
   const [copied, setCopied] = useState("");
 
   const fetchUrls = async () => {
-    const response = await axios.get("http://localhost:5173/api/url");
+    const response = await axios.get(
+      "https://url-shortener-lpf1.onrender.com/api/url",
+    );
     setUrls(response.data.data);
   };
 
   const createShortUrl = async () => {
-    const response = await axios.post("http://localhost:5173/api/url", {
-      url: inputValue,
-    });
+    const response = await axios.post(
+      "https://url-shortener-lpf1.onrender.com/api/url",
+      {
+        url: inputValue,
+      },
+    );
 
     setCurrentUrl({
       originalUrl: response.data.data.originalUrl,
@@ -39,7 +44,7 @@ const App = () => {
   };
 
   const deleteUrl = async (id) => {
-    await axios.delete(`http://localhost:5173/api/url/${id}`);
+    await axios.delete(`https://url-shortener-lpf1.onrender.com/api/url/${id}`);
     fetchUrls();
   };
 
@@ -48,7 +53,9 @@ const App = () => {
   }, []);
 
   const copyUrl = async (shortCode) => {
-    await navigator.clipboard.writeText(`http://localhost:3000/${shortCode}`);
+    await navigator.clipboard.writeText(
+      `https://url-shortener-lpf1.onrender.com/${shortCode}`,
+    );
 
     setCopied(shortCode);
     setTimeout(() => setCopied(""), 2000);
@@ -130,12 +137,12 @@ const App = () => {
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div className="min-w-0">
                 <a
-                  href={`http://localhost:3000/${currentUrl.shortCode}`}
+                  href={`https://url-shortener-lpf1.onrender.com/${currentUrl.shortCode}`}
                   target="_blank"
                   rel="noreferrer"
                   className="text-lg md:text-xl font-semibold text-white hover:text-orange-400 transition break-all"
                 >
-                  localhost:3000/{currentUrl.shortCode}
+                  https://url-shortener-lpf1.onrender.com/{currentUrl.shortCode}
                   <ExternalLink size={14} className="inline ml-2" />
                 </a>
 
@@ -216,7 +223,7 @@ const App = () => {
 
                     <a
                       onClick={() => fetchUrls()}
-                      href={`http://localhost:3000/${url.shortCode}`}
+                      href={`https://url-shortener-lpf1.onrender.com/${url.shortCode}`}
                       target="_blank"
                       rel="noreferrer"
                       className="text-orange-400 font-semibold text-sm hover:text-orange-300 transition"
